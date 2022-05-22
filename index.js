@@ -366,7 +366,7 @@ document.querySelector(".startSort").addEventListener("click", () => {
         })
     }
         const errTextNums = document.querySelector(".errNums")
-            if(optSelected === false || nums.length <= 1) {
+            if(optSelected === false && nums.length <= 1) {
                 if (errTextNums.classList.contains("errNumsVisible"))
                     errTextNums.classList.remove("errNumsVisible")
                 setTimeout(() => {
