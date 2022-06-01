@@ -205,7 +205,48 @@ async function quickSortEducational(left,right,nums){
         // await Promise.all([p1,p2])
     }
 }
+async function percolate(nums,n,i){
+    let target = i
+    const l = i * 2 + 1
+    const r = l + 1
+    if(l < n && parseInt(nums[l].textContent) < parseInt(nums[i].textContent))
+        target = l
+    if(r < n && parseInt(nums[r].textContent) < parseInt(nums[target].textContent))
+        target = r
+    if(target !== i){
+        animateSelected(i, nums)
+        await animateSelected(target, nums)
+        animateChange(i, target, nums)
+        await swap(i, target, nums);
 
+        draw(nums)
+        animateChangeHelper(i, target, nums)
+
+        await percolate(nums, n, target)
+    }
+}
+async function heapSort(nums){
+    let n = nums.length
+    for(let i = n / 2 - 1; i >= 0; i--)
+        await percolate(nums, n, i);
+
+    for(let i = n - 1; i >= 0; i--){
+
+        animateSelected(i, nums)
+        await animateSelected(0, nums)
+        animateChange(i, 0, nums)
+        await swap(i, 0, nums);
+
+        draw(nums)
+        animateChangeHelper(i, 0, nums)
+
+        n--
+
+        await percolate(nums,n,0)
+    }
+
+    console.log(nums)
+}
 
 function closeMenu(){
     document.querySelector(".head").classList.add("hidden")
@@ -302,7 +343,7 @@ document.querySelector(".startSort").addEventListener("click", () => {
 
         })
     nums.forEach((num, index) => {
-        console.log(num)
+
         const newItem = document.createElement("div")
         newItem.textContent = String(num)
         newItem.classList.add("item")
@@ -315,7 +356,7 @@ document.querySelector(".startSort").addEventListener("click", () => {
         numsObj.push(newItem)
     })
     let algoSelected = false
-    console.log(optSelected, nums.length)
+
     if(nums.length > 1 || optSelected === true) {
         algos.forEach(algo => {
             if (algo.classList.contains("selected")) {
@@ -362,6 +403,24 @@ document.querySelector(".startSort").addEventListener("click", () => {
                             document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
                         })
                 }
+                else if (algo.classList.contains("heap")) {
+                    closeMenu()
+                    const timeStart = performance.now()
+                    // if (document.querySelector(".edButton").classList.contains("selected")) {
+                    //     speed = 1500
+                    //     speedField.value = 1500
+                    //     document.querySelector(".speedValue").textContent = 1500
+                    //     document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
+                    //         " and they are to be changed with the item that has a red border"
+                    //     selectionSortEducational(numsObj).then(() => {
+                    //         document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                    //     })
+                    // } else
+                        heapSort(numsObj).then(() => {
+                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                        })
+                }
+
             }
         })
     }
