@@ -4,6 +4,10 @@
 **An educational visualization tool to explore and understand sorting algorithms.**  
 [Live Site](https://sortalgs.stefansecrieru.com/) | [GitHub Repo](https://github.com/Stefan3002/SortAlgs)
 
+## Timestamps
+- Initial commit: 22 May 2022
+- Last update: 09 July 2025( complete visual remake )
+
 ## Overview
 
 SortAlgs is a web-based application designed to make learning sorting algorithms intuitive and engaging. By combining interactive animations with an educational walkthrough mode, it helps users grasp the logic behind popular sorting techniques in a visual and step-by-step manner.
