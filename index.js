@@ -1,3 +1,5 @@
+
+
 function draw(nums){
     const area = document.querySelector("#area")
     area.innerHTML = ''
@@ -251,9 +253,9 @@ async function heapSort(nums){
 function closeMenu(){
     document.querySelector(".head").classList.add("hidden")
     document.querySelector(".menu").classList.add("noDisplay")
-    document.querySelector(".numsField").classList.add("noDisplay")
-    document.querySelector(".title").classList.add("noDisplay")
-    document.querySelector(".menuBtn").classList.add("rotateRight")
+    // document.querySelector(".numsField").classList.add("noDisplay")
+    // document.querySelector(".title").classList.add("noDisplay")
+    // document.querySelector(".menuBtn").classList.add("rotateRight")
 }
 
 document.querySelector(".menuBtn").addEventListener("click", () => {
@@ -366,11 +368,11 @@ document.querySelector(".startSort").addEventListener("click", () => {
                     const timeStart = performance.now()
                     if (document.querySelector(".edButton").classList.contains("selected"))
                         bubble(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                     else
                         bubble(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                 } else if (algo.classList.contains("quick")) {
                     closeMenu()
@@ -380,11 +382,11 @@ document.querySelector(".startSort").addEventListener("click", () => {
                             ". The current pivot is the one closest to the top, it will try to sort everything above it. After it finishes" +
                             " it will move to the next pivot below the current one."
                         quickSortEducational(0, numsObj.length - 1, numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                     } else
                         quickSort(0, numsObj.length - 1, numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                 } else if (algo.classList.contains("selection")) {
                     closeMenu()
@@ -393,14 +395,15 @@ document.querySelector(".startSort").addEventListener("click", () => {
                         speed = 1500
                         speedField.value = 1500
                         document.querySelector(".speedValue").textContent = 1500
+                        document.querySelector('.info').classList.remove('noDisplay')
                         document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
                             " and they are to be changed with the item that has a red border"
                         selectionSortEducational(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                     } else
                         selectionSort(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                 }
                 else if (algo.classList.contains("heap")) {
@@ -413,11 +416,11 @@ document.querySelector(".startSort").addEventListener("click", () => {
                     //     document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
                     //         " and they are to be changed with the item that has a red border"
                     //     selectionSortEducational(numsObj).then(() => {
-                    //         document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                    //         document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                     //     })
                     // } else
                         heapSort(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(performance.now() - timeStart) + ' ms'
+                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
                 }
 

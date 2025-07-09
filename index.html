@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Visualize Sorting Algos</title>
-<!--    Font Awesome-->
-    <script src="https://kit.fontawesome.com/4ef2199138.js" crossorigin="anonymous"></script>
 <!--    Gsap-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
 <!--My scripts-->
     <script src="index.js" defer></script>
     <link rel="stylesheet" href="style.css">
-<!--    FA-->
-    <script src="https://kit.fontawesome.com/4ef2199138.js" crossorigin="anonymous"></script>
 <!--    Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,31 +17,44 @@
     <header>
         <nav class="head">
             <div class="menuHead">
-                <a href="#" class="title"><h1>SortAlgs</h1></a>
-                <i class="menuBtn fa-xl fa-solid fa-angles-left"></i>
+                    <h1>SortAlgs</h1>
+<!--                    <p>Execution time:</p>-->
+<!--                    <p class="execTime"></p>-->
+                <img src="img/caret.svg" alt="Open/Close Menu" class="svg-icon menuBtn">
             </div>
 
-            <input type="text" class="numsField" placeholder="Numbers">
+
             <p class="errAlgo">Please select an algorithm</p>
             <p class="errNums">Please input some numbers or select an option</p>
 
-            <ul class="menu">
-                <li><input class="speedField" type="range" min="0" max="6000"><p>Speed (ms): </p><p class="speedValue">700</p></li>
-<!--                <li><input type="text" class="speedField" placeholder="Speed"></li>-->
-                <div class="sortingAlgs">
-                    <li class="algButton bubble">Bubble</li>
-                    <li class="algButton quick">Quick</li>
-                    <li class="algButton selection">Selection</li>
-                    <li class="algButton heap">Heap</li>
-                    <hr>
-                    <li class="optButton asc">All Ascending</li>
-                    <li class="optButton random">Random</li>
-                    <hr>
-                    <li class="edButton educational">Educational Mode</li>
-                    <li><button class="startSort">Go</button></li>
+            <div class="menu">
+                <div class="speed-inputs">
+                    <input type="text" class="numsField" placeholder="Numbers">
+                    <p>Delay (ms): </p>
+                    <p class="speedValue">700</p>
+                    <input class="speedField" type="range" min="0" max="6000">
                 </div>
 
-            </ul>
+<!--                <li><input type="text" class="speedField" placeholder="Speed"></li>-->
+                <div class="wrapper sortingAlgs">
+<!--                    <div class="algs-left">-->
+                        <span class="button algButton bubble">Bubble</span>
+                        <span class="button algButton quick">Quick</span>
+                        <span class="button algButton selection">Selection</span>
+                        <span class="button algButton heap">Heap</span>
+<!--                    </div>-->
+<!--                    <div class="algs-right">-->
+                        <hr>
+                        <span class="button optButton asc">All Ascending</span>
+                        <span class="button optButton random">Random</span>
+                        <hr>
+                        <span class="button edButton educational">Educational Mode</span>
+                        <hr>
+                        <button class="button startSort">Start</button>
+<!--                    </div>-->
+                </div>
+
+            </div>
         </nav>
     </header>
     <main>
@@ -58,13 +67,13 @@
 
     </main>
     <footer>
-        <p>Create by <a href="https://www.linkedin.com/in/%C8%99tefan-secrieru-b0b60b224/">Stefan Secrieru</a></p>
-        <p>Note: to stop or to start another visualizer please refresh the page.</p>
-        <br>
-        <p>Execution time:</p>
-        <p class="execTime"></p>
-        <p class="info"></p>
-        <a href="https://www.buymeacoffee.com/Stefan30"><p><i class="fa-2x fa-solid fa-mug-hot" style="margin-right: .5em;"></i>Buy me a coffee!</p></a>
+        <div class="wrapper">
+            <p>Created by <a href="https://www.linkedin.com/in/%C8%99tefan-secrieru-b0b60b224/">Stefan Secrieru</a></p>
+            <p>Execution time:</p>
+            <p class="execTime"></p>
+            <p class="info noDisplay"></p>
+            <a href="https://www.buymeacoffee.com/Stefan30"><p><i class="fa-2x fa-solid fa-mug-hot" style="margin-right: .5em;"></i>Buy me a coffee!</p></a>
+        </div>
     </footer>
 </body>
 </html>

@@ -1,0 +1,44 @@
+body
+  font-family: "Montserrat", sans-serif
+  margin: 0
+  color: $text-color
+  display: flex
+  flex-direction: column
+  height: 100vh
+  justify-content: space-between
+a
+  color: inherit
+.wrapper
+  width: 80%
+  margin: auto
+button, input
+  border: none
+  font-family: "Montserrat", sans-serif
+.svg-icon
+  width: 30px
+
+.outline
+  border: 5px solid black !important
+
+.chosenCandidate
+  background: lightcyan
+  &:hover
+    z-index: 1
+    color: black
+  &::before
+    content: ""
+    background: white
+    height: 100%
+    width: 0
+    position: absolute
+    left: 0
+    top: 0
+    transition: all 0.3s
+
+  &:hover::before
+    z-index: -1
+    width: 100%
+    transition: all 0.3s
+
+.noDisplay
+  display: none

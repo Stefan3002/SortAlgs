@@ -1,0 +1,49 @@
+@import "variables"
+
+.head
+  background-color: $main-color
+
+.sortingAlgs
+  display: flex
+  gap: 1rem
+  justify-content: space-between
+  flex-wrap: wrap
+
+
+.selected
+  background: $whitesmoke !important
+.button
+  color: $dark-text-color
+  //position: relative
+  background: $accent-color
+  margin: .5rem 0
+  padding: .5rem
+  border-radius: .5rem
+  transition: all .15s
+  &:hover
+    background: $whitesmoke
+
+
+.speed-inputs
+  display: flex
+  gap: 1rem
+  flex-wrap: wrap
+  justify-content: center
+  align-items: center
+  input
+    padding: .5rem
+    border-radius: .5rem
+
+.menuHead
+  gap: 1rem
+  display: flex
+  justify-content: center
+  align-items: center
+  h1
+    font-size: 2rem
+    font-weight: 800
+    margin: .5rem 0
+  .menuBtn
+    transition: all .15s
+    &:hover
+      transform: scale(1.1)
