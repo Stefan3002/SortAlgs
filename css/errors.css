@@ -1,0 +1,15 @@
+.errAlgo, .errNums {
+  display: none;
+  text-align: center;
+  background: crimson;
+  border-radius: 4px;
+  padding: 0.7em;
+}
+
+.errAlgoVisible, .errNumsVisible {
+  animation-duration: 0.3s;
+  animation-name: shake;
+  display: block;
+}
+
+/*# sourceMappingURL=errors.css.map */

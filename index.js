@@ -1,4 +1,21 @@
+const blurDOM = document.querySelector('.blur')
 
+const closeErrors = () => {
+    blurDOM.classList.add('noDisplay')
+    document.querySelector('.errNums').classList.remove('errNumsVisible')
+    document.querySelector('.errAlgo').classList.remove('errAlgoVisible')
+}
+
+(() => {
+    blurDOM.addEventListener('click', () => {
+        closeErrors()
+    })
+    document.querySelectorAll('.error-close-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            closeErrors()
+        })
+    })
+})()
 
 function draw(nums){
     const area = document.querySelector("#area")
@@ -427,11 +444,18 @@ document.querySelector(".startSort").addEventListener("click", () => {
             }
         })
     }
+
+
+
+
+    const blurDOM = document.querySelector('.blur')
+
         const errTextNums = document.querySelector(".errNums")
             if(optSelected === false && nums.length <= 1) {
                 if (errTextNums.classList.contains("errNumsVisible"))
-                    errTextNums.classList.remove("errNumsVisible")
+                    closeErrors()
                 setTimeout(() => {
+                    blurDOM.classList.remove('noDisplay')
                     errTextNums.classList.add("errNumsVisible")
                 }, 1)
             }
@@ -441,9 +465,11 @@ document.querySelector(".startSort").addEventListener("click", () => {
 
     const errText = document.querySelector(".errAlgo")
     if(!algoSelected) {
-        if (errText.classList.contains("errAlgoVisible"))
+        if (errText.classList.contains("errAlgoVisible")) {
             errText.classList.remove("errAlgoVisible")
+        }
         setTimeout(() => {
+            blurDOM.classList.remove('noDisplay')
             errText.classList.add("errAlgoVisible")
         },1)
 
