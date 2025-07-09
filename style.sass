@@ -1,0 +1,41 @@
+@import "css/variables"
+@import "css/header"
+@import "css/colors"
+@import "css/global"
+@import "css/sorting"
+@import "css/footer"
+
+.errAlgo, .errNums
+  display: none
+  text-align: center
+  background: crimson
+  border-radius: 4px
+  padding: 0.7em
+
+.errAlgoVisible, .errNumsVisible
+  animation-duration: 0.3s
+  animation-name: shake
+  display: block
+
+
+
+@keyframes shake
+  0%
+    transform: translateX(10%)
+  25%
+    transform: translateX(-10%)
+  50%
+    transform: translateX(10%)
+  75%
+    transform: translateX(-10%)
+  100%
+    transform: translateX(0)
+
+@keyframes rotateRight
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(180deg)
+
+
+
