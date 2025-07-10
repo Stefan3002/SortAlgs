@@ -17,6 +17,7 @@
     <header>
         <nav class="head">
             <div class="menuHead">
+                <span class="button stop-button noDisplay">Stop</span>
                     <h1>SortAlgs</h1>
 <!--                    <p>Execution time:</p>-->
 <!--                    <p class="execTime"></p>-->
@@ -48,20 +49,36 @@
 
 <!--                <li><input type="text" class="speedField" placeholder="Speed"></li>-->
                 <div class="wrapper sortingAlgs">
-<!--                    <div class="algs-left">-->
-                        <span class="button algButton bubble">Bubble</span>
-                        <span class="button algButton quick">Quick</span>
-                        <span class="button algButton selection">Selection</span>
-                        <span class="button algButton heap">Heap</span>
-<!--                    </div>-->
-<!--                    <div class="algs-right">-->
+                    <div class="algs-category algs-left">
+                        <p class="algs-category-title">Algorithms</p>
+                        <div class="inner-algs-category">
+                            <span class="button algButton bubble">Bubble</span>
+                            <span class="button algButton quick">Quick</span>
+                            <span class="button algButton selection">Selection</span>
+                            <span class="button algButton heap">Heap</span>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div class="algs-category algs-right">
+                        <p class="algs-category-title">Numbers</p>
+                        <div class="inner-algs-category">
+                            <span class="button optButton asc">All Ascending</span>
+                            <span class="button optButton random">Random</span>
+                        </div>
+
+                    </div>
                         <hr>
-                        <span class="button optButton asc">All Ascending</span>
-                        <span class="button optButton random">Random</span>
-                        <hr>
+                    <div class="algs-category">
+                        <p class="algs-category-title">Misc</p>
                         <span class="button edButton educational">Educational Mode</span>
+                    </div>
                         <hr>
-                        <button class="button startSort">Start</button>
+                    <div class="algs-category">
+                        <p class="algs-category-title">Sort</p>
+                        <span class="button startSort">Start</span>
+
+                    </div>
 <!--                    </div>-->
                 </div>
 
@@ -74,6 +91,8 @@
 
         </section>
         <section id="area">
+            <h2 class="placeholder-title">Select an algorithm and some numbers to start</h2>
+            <img src="img/placeholder.svg" class="placeholder-icon" alt="">
         </section>
 
     </main>

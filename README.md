@@ -6,7 +6,7 @@
 
 ## Timestamps
 - Initial commit: 22 May 2022
-- Last update: 09 July 2025( complete visual remake )
+- Complete visual remake: 10 July 2025
 
 ## Overview
 
@@ -19,6 +19,8 @@ SortAlgs is a web-based application designed to make learning sorting algorithms
 - DOM manipulation
 - Vanilla technologies proficiency
 - Data structures and algorithms understanding
+- Color theory application
+- Consistent design principles
 
 ---
 

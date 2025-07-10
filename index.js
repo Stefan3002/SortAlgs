@@ -1,4 +1,7 @@
 const blurDOM = document.querySelector('.blur')
+let speed = 10
+const MARGINITEM = 1
+
 
 const closeErrors = () => {
     blurDOM.classList.add('noDisplay')
@@ -7,6 +10,7 @@ const closeErrors = () => {
 }
 
 (() => {
+    // Add event listeners to close errors
     blurDOM.addEventListener('click', () => {
         closeErrors()
     })
@@ -26,6 +30,7 @@ function draw(nums){
 }
 
 async function swap(x,y,nums){
+    // Function to swap two elements in the nums array and animate the swap and wait for the animation to finish
     let aux = nums[x]
     nums[x] = nums[y]
     nums[y] = aux
@@ -58,8 +63,6 @@ async function animateSelectedHelper(x, nums){
     })
 }
 function animateChange(i, j, nums){
-
-
     gsap.to(nums[i], {
         duration: speed / 1000 / 3,
         y: 100 * (j - i) + MARGINITEM + '%',
@@ -288,59 +291,70 @@ document.querySelector(".menuBtn").addEventListener("click", () => {
         closeMenu()
 })
 
-const algos = document.querySelectorAll(".algButton")
-const option = document.querySelectorAll(".optButton")
-algos.forEach(alg => {
-    alg.addEventListener("click", (e) => {
-        const clicked = e.target
-        clicked.classList.add("selected")
-        algos.forEach(algo => {
-            if(algo.classList.contains("selected") && algo !== alg)
-                algo.classList.remove("selected")
+const addInitialListeners = (algos, options) => {
+
+    algos.forEach(alg => {
+        alg.addEventListener("click", (e) => {
+            const clicked = e.target
+            clicked.classList.add("selected")
+            algos.forEach(algo => {
+                if(algo.classList.contains("selected") && algo !== alg)
+                    algo.classList.remove("selected")
+            })
         })
     })
-})
-option.forEach(opt => {
-    opt.addEventListener("click", (e) => {
-        const clicked = e.target
-        if(!clicked.classList.contains("selected")) {
-            clicked.classList.add("selected")
-            option.forEach(optt => {
-                if (optt.classList.contains("selected") && optt !== opt)
-                    optt.classList.remove("selected")
-            })
-        }
-        else
-            clicked.classList.remove("selected")
+
+
+    options.forEach(opt => {
+        opt.addEventListener("click", (e) => {
+            const clicked = e.target
+            if(!clicked.classList.contains("selected")) {
+                clicked.classList.add("selected")
+                options.forEach(optt => {
+                    if (optt.classList.contains("selected") && optt !== opt)
+                        optt.classList.remove("selected")
+                })
+            }
+            else
+                clicked.classList.remove("selected")
+        })
     })
-})
-let nums = []
-let speed = 10
-const MARGINITEM = 1
-const speedField = document.querySelector(".speedField")
+
+    const speedField = document.querySelector(".speedField")
 //Default speed
-speedField.value = 700
-speedField.addEventListener("change", () => {
-    document.querySelector(".speedValue").textContent = speedField.value
-})
-document.querySelector(".edButton").addEventListener("click", () => {
-    document.querySelector(".edButton").classList.add("selected")
-})
-let optSelected = false
+    speedField.value = 700
+    speedField.addEventListener("change", () => {
+        document.querySelector(".speedValue").textContent = speedField.value
+    })
+    document.querySelector(".edButton").addEventListener("click", () => {
+        document.querySelector(".edButton").classList.add("selected")
+    })
+}
 
-document.querySelector(".startSort").addEventListener("click", () => {
-   nums = document.querySelector(".numsField").value
-    nums = nums.split(',')
-    for(let i = 0; i < nums.length; i++)
-        nums[i] = parseInt(nums[i])
-    const area = document.querySelector("#area")
-    area.innerHTML = ''
-    const numsObj = []
 
-    speed = document.querySelector(".speedField").value
-    document.querySelector(".speedValue").textContent = speed
+(() => {
 
-        option.forEach(opt => {
+    const algos = document.querySelectorAll(".algButton")
+    const options = document.querySelectorAll(".optButton")
+    addInitialListeners(algos, options)
+
+    let nums = []
+
+    let optSelected = false
+
+    document.querySelector(".startSort").addEventListener("click", () => {
+        nums = document.querySelector(".numsField").value
+        nums = nums.split(',')
+        for(let i = 0; i < nums.length; i++)
+            nums[i] = parseInt(nums[i])
+        const area = document.querySelector("#area")
+        area.innerHTML = ''
+        const numsObj = []
+
+        speed = document.querySelector(".speedField").value
+        document.querySelector(".speedValue").textContent = speed
+
+        options.forEach(opt => {
             if (opt.classList.contains("selected")) {
                 nums = []
                 if (opt.classList.contains("asc")) {
@@ -361,125 +375,135 @@ document.querySelector(".startSort").addEventListener("click", () => {
 
 
         })
-    nums.forEach((num, index) => {
 
-        const newItem = document.createElement("div")
-        newItem.textContent = String(num)
-        newItem.classList.add("item")
-        const colorNum = Math.round(Math.random() * 10)
-        const colorClass = 'color' + colorNum
-        newItem.classList.add(colorClass)
-        newItem.style.height = document.documentElement.clientHeight / nums.length + 'px'
-        newItem.style.width = 10 + (num * 10) + 'px'
-        area.appendChild(newItem)
-        numsObj.push(newItem)
-    })
-    let algoSelected = false
+        if(nums.length > 0 && !isNaN(nums[0]))
+        nums.forEach((num, index) => {
 
-    if(nums.length > 1 || optSelected === true) {
-        algos.forEach(algo => {
-            if (algo.classList.contains("selected")) {
-                algoSelected = true
-                if (algo.classList.contains("bubble")) {
-                    closeMenu()
-                    const timeStart = performance.now()
-                    if (document.querySelector(".edButton").classList.contains("selected"))
-                        bubble(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                    else
-                        bubble(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                } else if (algo.classList.contains("quick")) {
-                    closeMenu()
-                    const timeStart = performance.now()
-                    if (document.querySelector(".edButton").classList.contains("selected")) {
-                        document.querySelector(".info").textContent = "The items with black border are the pivots of Quick Sort" +
-                            ". The current pivot is the one closest to the top, it will try to sort everything above it. After it finishes" +
-                            " it will move to the next pivot below the current one."
-                        quickSortEducational(0, numsObj.length - 1, numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                    } else
-                        quickSort(0, numsObj.length - 1, numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                } else if (algo.classList.contains("selection")) {
-                    closeMenu()
-                    const timeStart = performance.now()
-                    if (document.querySelector(".edButton").classList.contains("selected")) {
-                        speed = 1500
-                        speedField.value = 1500
-                        document.querySelector(".speedValue").textContent = 1500
-                        document.querySelector('.info').classList.remove('noDisplay')
-                        document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
-                            " and they are to be changed with the item that has a red border"
-                        selectionSortEducational(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                    } else
-                        selectionSort(numsObj).then(() => {
-                            document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                        })
-                }
-                else if (algo.classList.contains("heap")) {
-                    closeMenu()
-                    const timeStart = performance.now()
-                    // if (document.querySelector(".edButton").classList.contains("selected")) {
-                    //     speed = 1500
-                    //     speedField.value = 1500
-                    //     document.querySelector(".speedValue").textContent = 1500
-                    //     document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
-                    //         " and they are to be changed with the item that has a red border"
-                    //     selectionSortEducational(numsObj).then(() => {
-                    //         document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
-                    //     })
-                    // } else
+            const newItem = document.createElement("div")
+            newItem.textContent = String(num)
+            newItem.classList.add("item")
+            const colorNum = Math.round(Math.random() * 10)
+            const colorClass = 'color' + colorNum
+            newItem.classList.add(colorClass)
+            newItem.style.height = document.documentElement.clientHeight / nums.length + 'px'
+            newItem.style.width = 10 + (num * 10) + 'px'
+            area.appendChild(newItem)
+            numsObj.push(newItem)
+        })
+        let algoSelected = false
+
+        if(nums.length > 1 || optSelected === true) {
+            algos.forEach(algo => {
+                if (algo.classList.contains("selected")) {
+                    algoSelected = true
+                    const stopBtn = document.querySelector('.stop-button')
+                    stopBtn.classList.remove('noDisplay')
+                    stopBtn.addEventListener("click", () => {
+                        window.location.reload()
+                    })
+                    if (algo.classList.contains("bubble")) {
+                        closeMenu()
+                        const timeStart = performance.now()
+                        if (document.querySelector(".edButton").classList.contains("selected"))
+                            bubble(numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                        else
+                            bubble(numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                    } else if (algo.classList.contains("quick")) {
+                        closeMenu()
+                        const timeStart = performance.now()
+                        if (document.querySelector(".edButton").classList.contains("selected")) {
+                            document.querySelector(".info").textContent = "The items with black border are the pivots of Quick Sort" +
+                                ". The current pivot is the one closest to the top, it will try to sort everything above it. After it finishes" +
+                                " it will move to the next pivot below the current one."
+                            quickSortEducational(0, numsObj.length - 1, numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                        } else
+                            quickSort(0, numsObj.length - 1, numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                    } else if (algo.classList.contains("selection")) {
+                        closeMenu()
+                        const timeStart = performance.now()
+                        if (document.querySelector(".edButton").classList.contains("selected")) {
+                            speed = 1500
+                            speedField.value = 1500
+                            document.querySelector(".speedValue").textContent = 1500
+                            document.querySelector('.info').classList.remove('noDisplay')
+                            document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
+                                " and they are to be changed with the item that has a red border"
+                            selectionSortEducational(numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                        } else
+                            selectionSort(numsObj).then(() => {
+                                document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                            })
+                    }
+                    else if (algo.classList.contains("heap")) {
+                        closeMenu()
+                        const timeStart = performance.now()
+                        // if (document.querySelector(".edButton").classList.contains("selected")) {
+                        //     speed = 1500
+                        //     speedField.value = 1500
+                        //     document.querySelector(".speedValue").textContent = 1500
+                        //     document.querySelector(".info").textContent = "The item with black border is the maximum that the Selection Sort found up to that point" +
+                        //         " and they are to be changed with the item that has a red border"
+                        //     selectionSortEducational(numsObj).then(() => {
+                        //         document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
+                        //     })
+                        // } else
                         heapSort(numsObj).then(() => {
                             document.querySelector(".execTime").textContent = String(Math.ceil(performance.now() - timeStart)) + ' ms'
                         })
+                    }
+
                 }
-
-            }
-        })
-    }
+            })
+        }
 
 
 
 
-    const blurDOM = document.querySelector('.blur')
+        const blurDOM = document.querySelector('.blur')
 
         const errTextNums = document.querySelector(".errNums")
-            if(optSelected === false && nums.length <= 1) {
-                if (errTextNums.classList.contains("errNumsVisible"))
-                    closeErrors()
-                setTimeout(() => {
-                    blurDOM.classList.remove('noDisplay')
-                    errTextNums.classList.add("errNumsVisible")
-                }, 1)
-            }
-            else
-                errTextNums.classList.remove("errNumsVisible")
-
-
-    const errText = document.querySelector(".errAlgo")
-    if(!algoSelected) {
-        if (errText.classList.contains("errAlgoVisible")) {
-            errText.classList.remove("errAlgoVisible")
+        if(optSelected === false && nums.length <= 1) {
+            if (errTextNums.classList.contains("errNumsVisible"))
+                closeErrors()
+            setTimeout(() => {
+                blurDOM.classList.remove('noDisplay')
+                errTextNums.classList.add("errNumsVisible")
+            }, 1)
         }
-        setTimeout(() => {
-            blurDOM.classList.remove('noDisplay')
-            errText.classList.add("errAlgoVisible")
-        },1)
-
-    }
-    else
-        errText.classList.remove("errAlgoVisible")
+        else
+            errTextNums.classList.remove("errNumsVisible")
 
 
-})
+        const errText = document.querySelector(".errAlgo")
+        if(!algoSelected) {
+            if (errText.classList.contains("errAlgoVisible")) {
+                errText.classList.remove("errAlgoVisible")
+            }
+            setTimeout(() => {
+                blurDOM.classList.remove('noDisplay')
+                errText.classList.add("errAlgoVisible")
+            },1)
+
+        }
+        else
+            errText.classList.remove("errAlgoVisible")
+
+
+    })
 
 
 
+
+
+})()
 

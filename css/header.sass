@@ -47,3 +47,28 @@
     transition: all .15s
     &:hover
       transform: scale(1.1)
+
+.algs-category
+  display: flex
+  flex-direction: column
+  gap: .3rem
+  justify-content: center
+  align-items: center
+.algs-category-title
+  font-weight: 300
+  text-align: center
+  margin: 0
+
+.inner-algs-category
+  display: flex
+  flex-wrap: wrap
+  gap: 1rem
+.stop-button
+  background: $text-color
+
+@media screen and (max-width: 1024px)
+  .sortingAlgs
+    flex-direction: column
+    gap: 0
+    hr
+      width: 100px

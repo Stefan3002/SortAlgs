@@ -55,6 +55,39 @@
   transform: scale(1.1);
 }
 
+.algs-category {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.algs-category-title {
+  font-weight: 300;
+  text-align: center;
+  margin: 0;
+}
+
+.inner-algs-category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stop-button {
+  background: #F0DFAD;
+}
+
+@media screen and (max-width: 1024px) {
+  .sortingAlgs {
+    flex-direction: column;
+    gap: 0;
+  }
+  .sortingAlgs hr {
+    width: 100px;
+  }
+}
 .color0 {
   background: lightgreen;
 }
@@ -156,6 +189,15 @@ button, input {
 
 .noDisplay {
   display: none;
+}
+
+.placeholder-icon {
+  width: 300px;
+}
+
+.placeholder-title {
+  font-weight: 300;
+  color: #303633;
 }
 
 #area {
