@@ -291,7 +291,7 @@ document.querySelector(".menuBtn").addEventListener("click", () => {
         closeMenu()
 })
 
-const addInitialListeners = (algos, options) => {
+const addInitialListeners = (algos, options, speedField) => {
 
     algos.forEach(alg => {
         alg.addEventListener("click", (e) => {
@@ -320,7 +320,6 @@ const addInitialListeners = (algos, options) => {
         })
     })
 
-    const speedField = document.querySelector(".speedField")
 //Default speed
     speedField.value = 700
     speedField.addEventListener("change", () => {
@@ -336,7 +335,9 @@ const addInitialListeners = (algos, options) => {
 
     const algos = document.querySelectorAll(".algButton")
     const options = document.querySelectorAll(".optButton")
-    addInitialListeners(algos, options)
+    const speedField = document.querySelector(".speedField")
+
+    addInitialListeners(algos, options, speedField)
 
     let nums = []
 
@@ -416,6 +417,7 @@ const addInitialListeners = (algos, options) => {
                         closeMenu()
                         const timeStart = performance.now()
                         if (document.querySelector(".edButton").classList.contains("selected")) {
+                            document.querySelector('.info').classList.remove('noDisplay')
                             document.querySelector(".info").textContent = "The items with black border are the pivots of Quick Sort" +
                                 ". The current pivot is the one closest to the top, it will try to sort everything above it. After it finishes" +
                                 " it will move to the next pivot below the current one."
